@@ -10,11 +10,6 @@ func hapusPengeluaran() {
 	fmt.Scanln(&index)
 	index--
 
-	if index < 0 || index >= jumlahData {
-		fmt.Println("Nomor tidak valid.")
-		return
-	}
-
 	for i := index; i < jumlahData-1; i++ {
 		pengeluarans[i] = pengeluarans[i+1]
 	}
