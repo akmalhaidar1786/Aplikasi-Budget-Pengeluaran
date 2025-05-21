@@ -11,7 +11,10 @@ func tambahPengeluaran() {
 	fmt.Print("Masukkan jumlah pengeluaran (Rp): ")
 	fmt.Scanln(&jumlah)
 
-	pengeluarans[jumlahData] = Pengeluaran{Kategori: kategori, Jumlah: jumlah}
+	var p Pengeluaran
+	p.Kategori = kategori
+	p.Jumlah = jumlah
+	pengeluarans[jumlahData] = p
 	jumlahData++
 	fmt.Println("Pengeluaran berhasil ditambahkan.")
 }
