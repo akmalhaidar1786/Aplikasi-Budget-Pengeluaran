@@ -1,46 +1,33 @@
-func edit(app *Aplikasi) {
-	var idx int
-	var valid bool
+func ubahPengeluaran(data *[MaksData]Pengeluaran, jumlah int) {
+	if jumlah == 0 {
+		fmt.Println("Belum ada data pengeluaran.")
+	} else {
+		fmt.Println("Daftar pengeluaran:")
+		i := 0
+		for i < jumlah {
+			fmt.Printf("%d. %s - %d\n", i+1, data[i].Kategori, data[i].Jumlah)
+			i = i + 1
+		}
 
-	if app.jumlahData == 0 {
-		fmt.Println("Belum ada pengeluaran!")
-		return
-	}
-	
-	daftar(app)
-	
-	for valid = false; !valid; {
-		fmt.Print("pilih nomor (1-", app.jumlahData, "): ")
-		fmt.Scan(&idx)
+		var index int
+		fmt.Print("Masukkan nomor pengeluaran yang ingin diubah: ")
+		fmt.Scanln(&index)
 
-		if idx >= 1 && idx <= app.jumlahData {
-			valid = true
+		if index >= 1 && index <= jumlah {
+			var kategoriBaru string
+			var jumlahBaru int
+
+			fmt.Print("Masukkan kategori baru: ")
+			fmt.Scanln(&kategoriBaru)
+			fmt.Print("Masukkan jumlah baru: ")
+			fmt.Scanln(&jumlahBaru)
+
+			data[index-1].Kategori = kategoriBaru
+			data[index-1].Jumlah = jumlahBaru
+
+			fmt.Println("Pengeluaran berhasil diubah.")
 		} else {
-			fmt.Println("Inut tidak valid")
+			fmt.Println("Nomor tidak valid.")
 		}
 	}
-	idx--
-
-	var ulangi bool = true
-	var p Pengeluaran
-
-	for ulangi {
-		fmt.Print("Masukkan kategori baru: ")
-		fmt.Scan(&p.kategori)
-
-		valid = p.kategori == "transportasi" || p.kategori == "akomodasi" || 
-		p.kategori == "makanan" || p.kategori == "Makanan" || p.kategori == "hiburan" || p.kategori == "Hiburan"
-
-		if valid {
-			ulangi = false
-		} else {
-			fmt.Println("Mohon maaf kategori tidak tersedia.")
-		}
-	}
-	
-	fmt.Print("Masukkan jumlah baru: ")
-	fmt.Scan(&p.jumlah)
-
-	app.data[idx] = p
-	fmt.Println("Pengeluaran berhasil diedit!")
 }
