@@ -1,32 +1,19 @@
-func tambah(app *Aplikasi) {
-	var p Pengeluaran
-	
-	if app.jumlahData >= 250 {
-		fmt.Println("Maaf, sudah mencapai batas maksimal pengeluaran")
-		return
+func tambahPengeluaran(data *[MaksData]Pengeluaran, jumlah *int) {
+	if *jumlah < MaksData {
+		var kategori string
+		var jumlahPengeluaran int
+
+		fmt.Print("Masukkan kategori pengeluaran (transportasi/akomodasi/makanan/hiburan): ")
+		fmt.Scanln(&kategori)
+		fmt.Print("Masukkan jumlah pengeluaran: ")
+		fmt.Scanln(&jumlahPengeluaran)
+
+		data[*jumlah].Kategori = kategori
+		data[*jumlah].Jumlah = jumlahPengeluaran
+		*jumlah = *jumlah + 1
+
+		fmt.Println("Pengeluaran berhasil ditambahkan.")
+	} else {
+		fmt.Println("Data pengeluaran penuh. Tidak bisa menambah lagi.")
 	}
-
-
-	var ulangi bool = true
-	for ulangi {	
-		fmt.Print("Kategori (Transportasi/Akomodasi/Makanan/Hiburan): ")
-		fmt.Scan(&p.kategori)
-
-		var valid bool 
-		valid = p.kategori == "transportasi" || p.kategori == "akomodasi" || 
-		p.kategori == "makanan" || p.kategori == "Makanan" || p.kategori == "hiburan" || p.kategori == "Hiburan"
-			
-		if valid {
-			ulangi = false
-		} else {
-			fmt.Println("Mohon maaf kategori tidak tersedia.")
-		}
-	}
-
-	fmt.Print("Masukkan jumlah: ")
-	fmt.Scan(&p.jumlah)
-
-	app.data[app.jumlahData] = p
-	app.jumlahData++
-	fmt.Println("Pengeluaran berhasil ditambahkan!")
 }
